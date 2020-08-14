@@ -1,5 +1,5 @@
 <#
-.SYSNOPSIS
+.SYNOPSIS
 Converts registry paths to correct syntax needed for registry calls.
 
 .DESCRIPTION
