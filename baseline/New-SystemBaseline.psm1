@@ -1,14 +1,3 @@
-Function Write-ProgressHelper 
-{
-    param (
-        [Parameter(Mandatory=$true)][int]$StepNumber,
-        [Parameter(Mandatory=$true)][string]$Message,
-        [Parameter(Mandatory=$true)][string]$Title
-    )
-
-    Write-Progress -Activity $Title -Status $Message -PercentComplete (($StepNumber / $steps) * 100) -Id 1
-}
-
 <#
 .SYNOPSIS
 Performs system baseline.
@@ -88,6 +77,16 @@ PS> .\New-SystemBaseline.ps1 -Destination C:\Data\Baseline_20190822.txt -Process
 PS> .\New-SystemBaseline.ps1 -Processes -SocketsListening
 
 #>
+Function Write-ProgressHelper 
+{
+    param (
+        [Parameter(Mandatory=$true)][int]$StepNumber,
+        [Parameter(Mandatory=$true)][string]$Message,
+        [Parameter(Mandatory=$true)][string]$Title
+    )
+
+    Write-Progress -Activity $Title -Status $Message -PercentComplete (($StepNumber / $steps) * 100) -Id 1
+}
 Function New-SystemBaseline
 {
     # Defining parameters for the script.
@@ -138,7 +137,7 @@ Function New-SystemBaseline
     $stepCounter = 0
     
     # Initializing array for all produced objects from each component.
-    [hashtable]$outputObjects = @{}
+    [hashtable]$outputObjects = [ordered]@{}
     
     # Sets system setting to enumerate all objects in a collection regardless of screen size
     # This will expand all columns to show all their text.
